@@ -1,24 +1,23 @@
 package com.example.yop.myapplication;
 
-import java.util.Locale;
-
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.app.widgets.DrawView;
+import java.util.Locale;
 
 
 public class MyActivity extends Activity {
@@ -192,7 +191,58 @@ public class MyActivity extends Activity {
     }
 
     public static class FragmentDraw extends Fragment {
-        DrawView drawView;
+        private class DrawView extends View {
+            Paint paint = new Paint();
+
+            public DrawView(Context context) {
+                super(context);
+                paint.setColor(Color.BLACK);
+            }
+
+            public DrawView(Context context, AttributeSet attrs) {
+                super(context, attrs);
+                paint.setColor(Color.BLACK);
+            }
+
+            public DrawView(Context context, AttributeSet attrs, int defStyle) {
+                super(context, attrs, defStyle);
+                paint.setColor(Color.BLACK);
+            }
+
+            @Override
+            protected void onDraw(Canvas canvas) {
+                super.onDraw(canvas);
+                paint.setColor(Color.BLACK);
+                paint.setStrokeWidth(1);
+                canvas.drawCircle(300, 400, 200, paint);
+                canvas.drawCircle(100, 100, 100, paint);
+                canvas.drawCircle(400, 600, 150, paint);
+                canvas.drawCircle(300, 800, 200, paint);
+                canvas.drawCircle(500, 200, 80, paint);
+                canvas.drawCircle(300, 300, 130, paint);
+                paint.setColor(Color.RED);
+                paint.setStrokeWidth(5);
+                canvas.drawLine(0, 0, 500, 500, paint);
+                canvas.drawLine(500, 0, 0, 500, paint);
+            }
+
+            @Override
+            protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+                int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+                int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+                this.setMeasuredDimension(parentWidth, parentHeight);
+            }
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            super.onCreateView(inflater, container, savedInstanceState);
+
+            return new DrawView(this.getActivity());
+        }
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -212,13 +262,6 @@ public class MyActivity extends Activity {
         }
 
         public FragmentDraw() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_draw, container, false);
-            return rootView;
         }
 
         @Override
