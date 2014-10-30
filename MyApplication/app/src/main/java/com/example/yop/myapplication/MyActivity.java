@@ -81,13 +81,13 @@ public class MyActivity extends Activity {
 
             switch (position) {
                 case 0:
-                    fragment = new PlaceholderFragment();
+                    fragment = new DrawFragment();
                     break;
                 case 1:
                     fragment = new Fragment1();
                     break;
                 case 2:
-                    fragment = new DrawFragment();
+                    fragment = new PlaceholderFragment();
                     break;
             }
             return fragment;

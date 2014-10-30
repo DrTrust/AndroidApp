@@ -12,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Jeroen on 2014-10-30.
+ * Momentum by Wout
+ * Created by Yop Spanjers on 2014-10-30.
  */
 public class DrawFragment extends Fragment {
     private class DrawView extends View {
@@ -36,8 +37,8 @@ public class DrawFragment extends Fragment {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            Clock.drawOuterCircle(canvas,this.getWidth(), this.getHeight());
-            Clock.drawInnerCircle(canvas,this.getWidth(), this.getHeight());
+            Clock.drawOuterCircle(canvas, this.getWidth(), this.getHeight());
+            Clock.drawInnerCircle(canvas, this.getWidth(), this.getHeight());
             this.invalidate();
         }
 

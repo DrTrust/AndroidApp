@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import java.util.Calendar;
 
 /**
+ * Momentum by Wout
  * Created by Yop Spanjers on 30-10-2014.
  */
 public abstract class Clock {
