@@ -1,3 +1,5 @@
+package com.example.yop.myapplication;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -7,9 +9,9 @@ import java.util.Calendar;
 /**
  * Created by Yop Spanjers on 30-10-2014.
  */
-public class Clock {
+public abstract class Clock {
 
-    private int[] colors = {
+    private static int[] colors = {
             Color.rgb(246, 230, 196),
             Color.rgb(200,237,253),
             Color.rgb(252,199,202),
@@ -37,10 +39,10 @@ public class Clock {
             Color.rgb(246,230,196)
     };
 
-    Paint innerCircle = new Paint();
-    Paint outerCircle = new Paint();
+    static Paint innerCircle = new Paint();
+    static Paint outerCircle = new Paint();
 
-    public void drawOuterCircle(Canvas canvas, int screenWidth, int screenHeight)
+    public static void drawOuterCircle(Canvas canvas, int screenWidth, int screenHeight)
     {
         Calendar calendar = Calendar.getInstance();
         int x = screenWidth/2;
@@ -50,7 +52,7 @@ public class Clock {
         canvas.drawCircle(x,y,400,outerCircle);
     }
 
-    public void drawInnerCircle(Canvas canvas, int screenWidth, int screenHeight)
+    public static void drawInnerCircle(Canvas canvas, int screenWidth, int screenHeight)
     {
         Calendar calendar = Calendar.getInstance();
         float minute = calendar.get(Calendar.MINUTE);
@@ -64,8 +66,4 @@ public class Clock {
         innerCircle.setColor(colors[intTime]);
         canvas.drawCircle(x,y,width,innerCircle);
     }
-
-
-
-
 }

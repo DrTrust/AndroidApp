@@ -36,18 +36,9 @@ public class DrawFragment extends Fragment {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            paint.setColor(Color.BLACK);
-            paint.setStrokeWidth(1);
-            canvas.drawCircle(300, 400, 200, paint);
-            canvas.drawCircle(100, 100, 100, paint);
-            canvas.drawCircle(400, 600, 150, paint);
-            canvas.drawCircle(300, 800, 200, paint);
-            canvas.drawCircle(500, 200, 80, paint);
-            canvas.drawCircle(300, 300, 130, paint);
-            paint.setColor(Color.RED);
-            paint.setStrokeWidth(5);
-            canvas.drawLine(0, 0, 500, 500, paint);
-            canvas.drawLine(500, 0, 0, 500, paint);
+            Clock.drawOuterCircle(canvas,this.getWidth(), this.getHeight());
+            Clock.drawInnerCircle(canvas,this.getWidth(), this.getHeight());
+            this.invalidate();
         }
 
         @Override
