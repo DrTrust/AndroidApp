@@ -1,4 +1,4 @@
-package com.example.yop.myapplication;
+package com.example.yop.Momentum;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -8,6 +8,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+        //com.android.server.TwilightCalculator
 
 import java.util.Locale;
 
@@ -84,10 +85,10 @@ public class MyActivity extends Activity {
                     fragment = new DrawFragment();
                     break;
                 case 1:
-                    fragment = new Fragment1();
+                    fragment = new PlaceholderFragment();
                     break;
                 case 2:
-                    fragment = new PlaceholderFragment();
+                    fragment = new Fragment1();
                     break;
             }
             return fragment;
