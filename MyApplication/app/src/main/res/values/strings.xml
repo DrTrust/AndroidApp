@@ -11,5 +11,5 @@
     <string name="TitleBluetooth">Clock Connect</string>
     <string name="lblIntensity">Inner intensity</string>
     <string name="lblIntensity2">Outer intensity</string>
-
+    <string name="description">PUT DESCRIPTION HERE</string>
 </resources>
