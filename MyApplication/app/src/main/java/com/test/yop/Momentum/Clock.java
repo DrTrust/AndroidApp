@@ -3,6 +3,7 @@ package com.test.yop.Momentum;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -13,31 +14,31 @@ import java.util.Calendar;
 public abstract class Clock {
 
     private static int[] colors = {
-            Color.rgb(246, 230, 196),
-            Color.rgb(200,237,253),
-            Color.rgb(252,199,202),
-            Color.rgb(179,233,216),
-            Color.rgb(247,233,174),
-            Color.rgb(211,211,246),
-            Color.rgb(108,59,57),
-            Color.rgb(75,132,138),
-            Color.rgb(124,96,66),
-            Color.rgb(247,173,89),
-            Color.rgb(235,108,63),
-            Color.rgb(208,75,52),
-            Color.rgb(255,202,39),
-            Color.rgb(147,37,166),
-            Color.rgb(22,158,250),
-            Color.rgb(118,7,47),
-            Color.rgb(44,183,80),
-            Color.rgb(100,22,151),
-            Color.rgb(88,42,71),
-            Color.rgb(27,40,121),
-            Color.rgb(29,112,74),
-            Color.rgb(252,216,82),
-            Color.rgb(247,99,64),
-            Color.rgb(232,57,52),
-            Color.rgb(246,230,196)
+            Color.rgb(255, 206, 0),
+            Color.rgb(0,0,0),
+            Color.rgb(11,8,112),
+            Color.rgb(244,221,146),
+            Color.rgb(18,123,108),
+            Color.rgb(114,0,0), //5
+            Color.rgb(249,177,61),
+            Color.rgb(121,170,211),
+            Color.rgb(255,194,226),
+            Color.rgb(87,255,183),
+            Color.rgb(239,237,226), //10
+            Color.rgb(255,243,133),
+            Color.rgb(216,216,216),
+            Color.rgb(243,229,69),
+            Color.rgb(52,42,57),
+            Color.rgb(237,61,0), //15
+            Color.rgb(63,158,50),
+            Color.rgb(0,76,40),
+            Color.rgb(191,0,14),
+            Color.rgb(0,49,86),
+            Color.rgb(248,180,54), //20
+            Color.rgb(6,6,140),
+            Color.rgb(79,9,0),
+            Color.rgb(255,109,90),
+            Color.rgb(255, 206, 0)
     };
 
     static Paint innerCircle = new Paint();
@@ -48,7 +49,7 @@ public abstract class Clock {
         Calendar calendar = Calendar.getInstance();
         int x = screenWidth/2;
         int y = screenHeight/2;
-        int intTime = calendar.get((Calendar.HOUR));
+        int intTime = calendar.get((Calendar.HOUR_OF_DAY));
         outerCircle.setColor(colors[intTime]);
         canvas.drawCircle(x,y,400,outerCircle);
     }
@@ -63,8 +64,17 @@ public abstract class Clock {
 
         int x = screenWidth/2;
         int y = screenHeight/2;
-        int intTime = calendar.get((Calendar.HOUR)) + 1;
+        int intTime = calendar.get((Calendar.HOUR_OF_DAY)) + 1;
         innerCircle.setColor(colors[intTime]);
         canvas.drawCircle(x,y,width,innerCircle);
+    }
+
+    public static void drawOuterCircleSet(Canvas canvas, int screenWidth, int screenHeight, int hour)
+    {
+        Calendar calendar = Calendar.getInstance();
+        int x = screenWidth/2;
+        int y = screenHeight/2;
+        outerCircle.setColor(colors[hour]);
+        canvas.drawCircle(x,y,400,outerCircle);
     }
 }

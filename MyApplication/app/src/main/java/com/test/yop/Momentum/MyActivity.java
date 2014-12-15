@@ -85,7 +85,7 @@ public class MyActivity extends Activity {
                     fragment = new DrawFragment();
                     break;
                 case 1:
-                    fragment = new PlaceholderFragment();
+                    fragment = new SetFragment();
                     break;
                 case 2:
                     fragment = new Fragment1();

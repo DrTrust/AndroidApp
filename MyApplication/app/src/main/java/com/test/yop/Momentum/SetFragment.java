@@ -10,7 +10,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-public class Fragment1 extends Fragment {
+
+public class SetFragment extends Fragment {
     private class DrawView extends View {
         Paint paint = new Paint();
 
@@ -48,22 +49,21 @@ public class Fragment1 extends Fragment {
     }
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    public static Fragment1 newInstance(int sectionNumber) {
-        Fragment1 fragment = new Fragment1();
+    public static SetFragment newInstance(int sectionNumber) {
+        SetFragment fragment = new SetFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public Fragment1() {
+    public SetFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_my2, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_set, container, false);
         return rootView;
-
     }
 }
