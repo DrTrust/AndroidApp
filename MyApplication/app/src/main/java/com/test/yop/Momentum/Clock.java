@@ -44,17 +44,17 @@ public abstract class Clock {
     static Paint innerCircle = new Paint();
     static Paint outerCircle = new Paint();
 
-    public static void drawOuterCircle(Canvas canvas, int screenWidth, int screenHeight)
+    public static void drawOuterCircle(Canvas canvas)
     {
         Calendar calendar = Calendar.getInstance();
-        int x = screenWidth/2;
-        int y = screenHeight/2;
+        int x = canvas.getWidth()/2;
+        int y = canvas.getHeight()/2;
         int intTime = calendar.get((Calendar.HOUR_OF_DAY));
         outerCircle.setColor(colors[intTime]);
         canvas.drawCircle(x,y,400,outerCircle);
     }
 
-    public static void drawInnerCircle(Canvas canvas, int screenWidth, int screenHeight)
+    public static void drawInnerCircle(Canvas canvas)
     {
         Calendar calendar = Calendar.getInstance();
         float minute = calendar.get(Calendar.MINUTE);
@@ -62,10 +62,31 @@ public abstract class Clock {
         int time = (int)(minute + (second/60));
         int width = ((400/60)*time);
 
-        int x = screenWidth/2;
-        int y = screenHeight/2;
+        int x = canvas.getWidth()/2;
+        int y = canvas.getHeight()/2;
         int intTime = calendar.get((Calendar.HOUR_OF_DAY)) + 1;
         innerCircle.setColor(colors[intTime]);
+        canvas.drawCircle(x,y,width,innerCircle);
+    }
+
+    public static void drawOuterCircle(Canvas canvas, int intTimeHours)
+    {
+        int x = canvas.getWidth()/2;
+        int y = canvas.getHeight()/2;
+        outerCircle.setColor(colors[intTimeHours]);
+        canvas.drawCircle(x,y,400,outerCircle);
+    }
+
+    public static void drawInnerCircle(Canvas canvas, int intTimeHours, int intTimeMinutes)
+    {
+        Calendar calendar = Calendar.getInstance();
+        float minute = intTimeMinutes;
+        float second = 0;
+        int time = (int)(minute + (second/60));
+        int width = ((400/60)*time);
+        int x = canvas.getWidth()/2;
+        int y  = canvas.getHeight()/2;
+        innerCircle.setColor(colors[intTimeHours+1]);
         canvas.drawCircle(x,y,width,innerCircle);
     }
 

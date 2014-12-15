@@ -32,8 +32,8 @@ public class Fragment1 extends Fragment {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            Clock.drawOuterCircle(canvas, this.getWidth(), this.getHeight());
-            Clock.drawInnerCircle(canvas, this.getWidth(), this.getHeight());
+            Clock.drawOuterCircle(canvas);
+            Clock.drawInnerCircle(canvas);
             this.invalidate();
         }
 

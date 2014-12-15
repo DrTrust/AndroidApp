@@ -10,17 +10,34 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 
 /**
  * Momentum by Wout
  * Created by Yop Spanjers on 2014-10-30.
  */
 public class DrawFragment extends Fragment {
-    private class DrawView extends View {
+    public class DrawView extends View {
         Paint paint = new Paint();
+        boolean timeUpdate = true;
+        TimePicker timePicker;
+
+        public void setTimePicker(TimePicker timePicker) {
+            this.timePicker = timePicker;
+        }
+
+        public void setTimeUpdate(boolean timeUpdate) {
+            this.timeUpdate = timeUpdate;
+        }
 
         public DrawView(Context context) {
             super(context);
+            paint.setColor(Color.BLACK);
+        }
+
+        public DrawView(Context context, boolean timeUpdate) {
+            super(context);
+            this.timeUpdate = timeUpdate;
             paint.setColor(Color.BLACK);
         }
 
@@ -37,8 +54,13 @@ public class DrawFragment extends Fragment {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            Clock.drawOuterCircle(canvas, this.getWidth(), this.getHeight());
-            Clock.drawInnerCircle(canvas, this.getWidth(), this.getHeight());
+            if (timeUpdate) {
+                Clock.drawOuterCircle(canvas);
+                Clock.drawInnerCircle(canvas);
+            } else {
+                Clock.drawOuterCircle(canvas, timePicker.getCurrentHour());
+                Clock.drawInnerCircle(canvas, timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+            }
             this.invalidate();
         }
 
@@ -52,11 +74,22 @@ public class DrawFragment extends Fragment {
         }
     }
 
+    private static DrawView drawView;
+    private static boolean timeUpdate = true;
+
+    public static void setTimeUpdate(boolean timeUpdate) {
+        DrawFragment.timeUpdate = timeUpdate;
+    }
+
+    public static DrawView getDrawView() {
+        return drawView;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
-        return new DrawView(this.getActivity());
+        drawView = new DrawView(this.getActivity(), timeUpdate);
+        return drawView;
     }
 
     /**
@@ -70,6 +103,19 @@ public class DrawFragment extends Fragment {
      * number.
      */
     public static DrawFragment newInstance(int sectionNumber) {
+        DrawFragment fragment = new DrawFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    /**
+     * Returns a new instance of this fragment for the given section
+     * number.
+     */
+    public static DrawFragment newInstance(int sectionNumber, boolean timeUpdate) {
+        DrawFragment.timeUpdate = timeUpdate;
         DrawFragment fragment = new DrawFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -95,4 +141,3 @@ public class DrawFragment extends Fragment {
         super.onDestroy();
     }
 }
-

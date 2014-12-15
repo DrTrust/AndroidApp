@@ -18,7 +18,7 @@ public class ClockWallpaper {
     {
         if (canvas == null)
             return;
-        Clock.drawOuterCircle(canvas, canvas.getWidth(), canvas.getHeight());
-        Clock.drawInnerCircle(canvas, canvas.getWidth(), canvas.getHeight());
+        Clock.drawOuterCircle(canvas);
+        Clock.drawInnerCircle(canvas);
     }
 }

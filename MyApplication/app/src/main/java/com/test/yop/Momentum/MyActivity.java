@@ -8,7 +8,9 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-        //com.android.server.TwilightCalculator
+import android.view.View;
+import android.widget.TimePicker;
+//com.android.server.TwilightCalculator
 
 import java.util.Locale;
 
@@ -85,7 +87,8 @@ public class MyActivity extends Activity {
                     fragment = new DrawFragment();
                     break;
                 case 1:
-                    fragment = new SetFragment();
+                    SetFragment setFragment = new SetFragment();
+                    fragment = setFragment;
                     break;
                 case 2:
                     fragment = new Fragment1();

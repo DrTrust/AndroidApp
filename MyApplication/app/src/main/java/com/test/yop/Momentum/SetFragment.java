@@ -10,52 +10,15 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 public class SetFragment extends Fragment {
-    private class DrawView extends View {
-        Paint paint = new Paint();
-
-        public DrawView(Context context) {
-            super(context);
-            paint.setColor(Color.BLACK);
-        }
-
-        public DrawView(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            paint.setColor(Color.BLACK);
-        }
-
-        public DrawView(Context context, AttributeSet attrs, int defStyle) {
-            super(context, attrs, defStyle);
-            paint.setColor(Color.BLACK);
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-            Clock.drawOuterCircle(canvas, this.getWidth(), this.getHeight());
-            Clock.drawInnerCircle(canvas, this.getWidth(), this.getHeight());
-            this.invalidate();
-        }
-
-        @Override
-        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-            int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-            int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-            this.setMeasuredDimension(parentWidth, parentHeight);
-        }
-    }
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    public static SetFragment newInstance(int sectionNumber) {
-        SetFragment fragment = new SetFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private static TimePicker timePicker;
+    private static DrawFragment.DrawView drawView;
 
     public SetFragment() {
     }
@@ -64,6 +27,17 @@ public class SetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_set, container, false);
+        DrawFragment drawFragment = (DrawFragment) getFragmentManager().findFragmentById(R.id.fragment);
+        drawView = drawFragment.getDrawView();
+        drawView.setTimeUpdate(false);
         return rootView;
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        timePicker = (android.widget.TimePicker) getView().findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
+        timePicker.setCurrentHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+        drawView.setTimePicker(timePicker);
     }
 }
