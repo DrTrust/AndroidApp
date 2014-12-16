@@ -1,9 +1,8 @@
-package com.test.yop.Momentum;
+package com.test.Momentum.Momentum;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
 import java.util.Calendar;
 

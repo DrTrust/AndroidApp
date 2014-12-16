@@ -1,4 +1,4 @@
-package com.test.yop.Momentum;
+package com.test.Momentum.Momentum;
 
 import android.appwidget.AppWidgetProvider;
 
