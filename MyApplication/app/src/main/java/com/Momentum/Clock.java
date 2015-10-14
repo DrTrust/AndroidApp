@@ -46,13 +46,10 @@ public abstract class Clock {
 
     static Paint innerCircle = new Paint();
     static Paint outerCircle = new Paint();
-
-    static int _circleWidth;
-
+    
     public static void drawOuterCircle(Canvas canvas)
     {
         Calendar calendar = Calendar.getInstance();
-        _circleWidth = (canvas.getWidth()/2 - 20);
         int x = canvas.getWidth()/2;
         int y = canvas.getHeight()/2;
         int intTime = calendar.get((Calendar.HOUR_OF_DAY));
@@ -66,13 +63,12 @@ public abstract class Clock {
         float minute = calendar.get(Calendar.MINUTE);
         float second = calendar.get(Calendar.SECOND);
         int time = (int)(minute + (second/59));
-        int width = ((400/60)*time);
 
         int x = canvas.getWidth()/2;
         int y = canvas.getHeight()/2;
         int intTime = calendar.get((Calendar.HOUR_OF_DAY)) + 1;
         innerCircle.setColor(colors[intTime]);
-        canvas.drawCircle(x,y,width,innerCircle);
+        canvas.drawCircle(x,y,(x - 40),innerCircle);
     }
 
     public static void drawOuterCircle(Canvas canvas, int intTimeHours)
@@ -86,22 +82,16 @@ public abstract class Clock {
 
     public static void drawInnerCircle(Canvas canvas, int intTimeHours, int intTimeMinutes)
     {
-        //Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         if ( intTimeHours > 23 || intTimeHours < 0 || intTimeMinutes > 59 || intTimeMinutes < 0)
         {
             throw new IllegalArgumentException("This is not a valid time");
         }
 
-        float minute = intTimeMinutes;
-        float second = 0;
-        int time = (int)(minute + (second/59));
-        int x = canvas.getWidth()/2;
-        int y  = canvas.getHeight()/2;
-        int width = (((x-40)/59)*time);
+        float x = canvas.getWidth()/2;
+        float y  = canvas.getHeight()/2;
 
         innerCircle.setColor(colors[intTimeHours+1]);
-        //canvas.drawCircle(x,y,width,innerCircle);
-        canvas.drawCircle(x,y,(((x - 40)/59)*time),innerCircle);
-
+        canvas.drawCircle(x, y, (((x - 40) / 60) * intTimeMinutes), innerCircle);
     }
 }
